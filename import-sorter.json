@@ -1,0 +1,23 @@
+{
+  "autoFormat": "onSave",
+  "quoteMark": "single",
+  "wrappingStyle": {
+    "maxBindingNamesPerLine": 2,
+    "maxDefaultAndBindingNamesPerLine": 2,
+    "maxExportNamesPerLine": 0,
+    "maxNamesPerWrappedLine": 1,
+    "ignoreComments": false
+  },
+  "exclude": ["node_modules"],
+  "excludeGlob": [],
+  "groupRules": ["^node:", {}, "^[@]", "^[~]", "^[.]"],
+  "sortRules": {
+    "paths": ["_", "aA"],
+    "names": ["_", "aA"]
+  },
+  "keepUnused": [".*"],
+  "emptyLinesBetweenGroups": 1,
+  "emptyLinesAfterAllImports": 1,
+  "removeLastSlashInPath": false,
+  "removeLastIndexInPath": false
+}

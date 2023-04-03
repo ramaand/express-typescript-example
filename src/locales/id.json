@@ -1,0 +1,28 @@
+{
+  "LISTENING_ON_PORT": "Listening on port {{port}}...",
+  "CONNECTING_SERVER": "Connecting to server...",
+  "CONNECTED_DB": "Connected to mongo DB",
+  "RUNNING_ON_PORT": "Server is running on port {{port}}.",
+  "DB_STATUS": "MongoDB status: {{status}}",
+  "DB_ERROR": "Error while connecting to database: {{error}}",
+
+  "WENT_WRONG": "Terjadi kesalahan!",
+  "NOT_FOUND": "Tidak ditemukan",
+  "MODEL_NOT_FOUND": "{{name}} tidak ditemukan!",
+  "HAS_BEEN_CREATE": "{{name}} telah dibuat.",
+  "FORMAT_ID_IS_INVALID": "Format {{name}} Id [{{index}}] salah",
+  "FORMAT_IDS_IS_INVALID": "Format {{name}} Id salah",
+  "ACCESS_DENIED": "Akses ditolak",
+  "NOT_AUTHORIZE": "Anda tidak berwenang",
+  "MODEL_IS_INVALID": "{{name}} tidak berlaku",
+
+  "LOGIN_SUCCESSFULLY": "Login berhasil",
+  "LOGIN_WRONG_PASSWORD": "Kata sandi atau nama pengguna salah",
+
+  "SUCCESS_ADD": "Berhasil menambahkan {{name}}",
+  "SUCCESS_UPDATE": "Berhasil memperbarui {{name}}",
+  "SUCCESS_DELETE": "Berhasil menghapus {{name}}",
+  "SUCCESS_RETRIEVE": "Berhasil mengambil {{name}}",
+
+  "CHECK_AUTH": "Hello user, you are logged in"
+}
