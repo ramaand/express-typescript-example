@@ -10,7 +10,18 @@
   },
   "exclude": ["node_modules"],
   "excludeGlob": [],
-  "groupRules": ["^node:", {}, "^[@]", "^[~]", "^[.]"],
+  "groupRules": [
+    "^node:",
+    {},
+    ["^./types", "^./interfaces"],
+    ["^./constant", "^./config", "^./library", "^./middleware"],
+
+    "^./utils",
+
+    "^[@]",
+    "^[~]",
+    "^[.]"
+  ],
   "sortRules": {
     "paths": ["_", "aA"],
     "names": ["_", "aA"]
