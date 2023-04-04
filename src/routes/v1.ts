@@ -1,6 +1,7 @@
+import { ICustomRoute } from '../types/Route';
 import { usersRoute } from './index';
 
-export const routesVersion1: IRoute[] = [
+export const routesVersion1: ICustomRoute[] = [
   // { url: '/api/v1/auth', component: authRoute },
   // { url: '/api/v1/categories', component: categoriesRoute },
   // { url: '/api/v1/hotels', component: hotelsRoute },

@@ -1,21 +1,8 @@
-import express, {
-  NextFunction,
-  Request,
-  Response,
-} from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 
-import {
-  deleteUser,
-  getUser,
-  getUsers,
-  updateUser,
-} from '../controllers/userController';
-import {
-  verifyAdmin,
-  verifyToken,
-  verifyUser,
-} from '../middleware/guardRoute';
-import { IUser } from '../types/User';
+import { deleteUser, getUser, getUsers, updateUser } from '../controllers/userController';
+import { verifyAdmin, verifyToken, verifyUser } from '../middleware/guardRoute';
+import { IUserTokenResponse } from '../types/User';
 import { createResponse } from '../utils/success';
 
 const router = express.Router();
@@ -34,8 +21,8 @@ const router = express.Router();
 // })
 /** For testing only */
 
-router.get('/get-profile', verifyUser, (req: Request, res: Response, next: NextFunction) => {
-  createResponse(res, { data: req.user });
+router.get('/get-profile', verifyUser, (req: Request, res: Response) => {
+  createResponse(res, { data: (req as IUserTokenResponse & Request).user });
 });
 
 // UPDATE

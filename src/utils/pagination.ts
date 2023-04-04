@@ -14,14 +14,14 @@ export const customPaginationLabels = () => {
   };
 };
 
-export const getPagination = (page, size) => {
-  const limit = size ? +size : parseInt(DEFAULT_PAGE_SIZE);
+export const getPagination = (page: number, size: number) => {
+  const limit = size ? +size : DEFAULT_PAGE_SIZE;
   const offset = page ? page * limit : 0;
 
   return { limit, offset };
 };
 
-export const getDefaultOptions = (page, size) => {
-  const limit = size ? +size : parseInt(DEFAULT_PAGE_SIZE);
+export const getDefaultOptions = (page: number, size: number) => {
+  const limit = size ? +size : DEFAULT_PAGE_SIZE;
   return { customLabels: customPaginationLabels(), page, limit };
 };

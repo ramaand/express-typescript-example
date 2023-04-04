@@ -1,13 +1,22 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import mongoose from 'mongoose';
 import multer from 'multer';
 
+import { IErrorResponse } from './types/Global';
+
+import { IS_DEV_MODE } from './constant';
 import { config } from './config/config';
 import i18n from './config/i18n';
 import Logging from './library/Logging';
+
 import { dbConnectionHandler } from './utils/dbConnectionHandler';
+import { createError } from './utils/error';
+import { createResponse } from './utils/success';
+
+import { defineRoutes } from './routes';
 
 const app = express();
 
@@ -24,7 +33,7 @@ mongoose
   .then(() => {
     Logging.info(i18n.__('CONNECTED_DB'));
     Logging.info(i18n.__('RUNNING_ON_PORT', { port: config.server.port.toString() }));
-    // startServer()
+    startServer();
   })
   .catch((error) => {
     Logging.error('Unable to connect : ');
@@ -41,7 +50,7 @@ const startServer = () => {
     res.on('finish', () => {
       /** Log the Response */
       Logging.info(
-        `Incomming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${res.statusCode}]`
+        `Outcomming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${res.statusCode}] - Message: [${res.statusMessage}]`
       );
     });
 
@@ -80,7 +89,7 @@ const startServer = () => {
   /** Routes */
   defineRoutes((routes) => {
     routes.map((route) => {
-      app.use(route.url, route.component);
+      app.use(route.url, route.service);
     });
   });
 
@@ -93,19 +102,26 @@ const startServer = () => {
   });
 
   /** Error handling */
-  app.use((err, req, res, next) => {
-    const errorStatus = err.status || 500;
-    const errorMessage = err.message || 'Something went wrong!';
-    const response = {
-      success: false,
-      status: errorStatus,
-      message: errorMessage
-    };
-    if (IS_DEV_MODE) response.stack = err.stack;
-    return res.status(errorStatus).json(response);
-  });
+  app.use(
+    (
+      err: { status: number; message: string; stack: any },
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const errorStatus = err.status || 500;
+      const errorMessage = err.message || 'Something went wrong!';
+      const response: IErrorResponse = {
+        success: false,
+        status: errorStatus,
+        message: errorMessage
+      };
+      if (IS_DEV_MODE) response.stack = err.stack;
+      res.status(errorStatus).json(response);
+    }
+  );
 
   app.listen(config.server.port, () =>
-    Logging.info(i18n.__('LISTENING_ON_PORT', { PORT: config.server.port }))
+    Logging.info(i18n.__('LISTENING_ON_PORT', { PORT: config.server.port.toString() }))
   );
 };

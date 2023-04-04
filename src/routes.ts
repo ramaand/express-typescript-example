@@ -1,5 +1,6 @@
 import { routesVersion1 } from './routes/v1';
+import { ICustomRoute } from './types/Route';
 
-const routes = [...routesVersion1];
+const routes: ICustomRoute[] = [...routesVersion1];
 
-export const defineRoutes = (callback: (routes: IRoute[]) => void): void => callback(routes);
+export const defineRoutes = (callback: (args: ICustomRoute[]) => void) => callback(routes);
